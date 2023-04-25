@@ -9,12 +9,18 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 
 public class WrapperedSwerveAzimuthEncoder {
-
     AbstractSwerveAzmthEncoder enc;
     double curAngleRad;
     // TODO: Bring in oxconfig maybe?
     double mountingOffset;
 
+    /**
+     * Constructor for a wrapped swerve azimuth encoder, or general through bore encoder
+     * @param type Type of swerve azimuth/absolute through bore encoder to use
+     * @param prefix Prefix for the encoder
+     * @param id ID of the encoder
+     * @param dfltMountingOffset_rad Default mounting offset of the encoder in radians
+     */
     public WrapperedSwerveAzimuthEncoder(SwerveAzmthEncType type, String prefix, int id, double dfltMountingOffset_rad) {
         if (RobotBase.isReal()) {
             switch (type) {
@@ -37,23 +43,36 @@ public class WrapperedSwerveAzimuthEncoder {
         this.mountingOffset = dfltMountingOffset_rad;
     }
 
+    /**
+     * Updates the abstracted swerve azimuth encoder values
+     */
     public void update() {
         curAngleRad = Units.degreesToRadians(wrapAngleDeg(Units.radiansToDegrees(enc.getRawAngle_rad() - mountingOffset)));
     }
 
+    /**
+     * @return Angle of the swerve azimuth encoder in radians
+     */
     public double getAngle_rad() {
         return curAngleRad;
     }
 
+    /**
+     * @return Angle of the swerve azimuth encoder in degrees
+     */
     public Rotation2d getRotation2d() {
         return new Rotation2d(this.getAngle_rad());
     }
 
+    /**
+     * Encoder types for real robot
+     */
     public enum SwerveAzmthEncType {
         SRXEncoder,
         CANCoder,
         Thrifty
     }
+    
     private double wrapAngleDeg(double angle) {
         angle %= 360;
         angle = angle > 180 ? angle - 360 : angle;

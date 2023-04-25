@@ -13,12 +13,14 @@ public class HardwareWrapper {
     public static void setPDBModuleType(PowerDistribution.ModuleType moduleType) {
         k_pdbModuleType = moduleType;
     }
+
     /**
      * @param speed, the number of times per second to run hardware sim loop
      */
     public static void setHardwareSimulationSpeed(double speed) {
         k_hardwareSimLoopSeconds = 1.0 / speed;
     }
+
     /**
      * @param speed, the number of times per second to run periodic loop
      */
