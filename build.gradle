@@ -40,7 +40,7 @@ test {
 
 publishing {
     publications {
-        autoConfig(MavenPublication) {
+        wrappers(MavenPublication) {
             from components.java
         }
     }
