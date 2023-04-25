@@ -81,5 +81,10 @@
       <option name="name" value="WPI515fe07e-bfc6-11fa-b3de-0242ac130004 _0Release" />
       <option name="url" value="https://maven.photonvision.org/repository/internal" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPI14b8ad04-24df-11ea-978f-2e728ce88125_0Release" />
+      <option name="name" value="WPI14b8ad04-24df-11ea-978f-2e728ce88125_0Release" />
+      <option name="url" value="https://www.playingwithfusion.com/frc/maven/" />
+    </remote-repository>
   </component>
 </project>

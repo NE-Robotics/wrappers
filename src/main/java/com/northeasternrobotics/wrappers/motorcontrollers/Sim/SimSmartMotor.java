@@ -1,9 +1,9 @@
-package com.northeasternrobotics.wrappers.motors.Sim;
+package com.northeasternrobotics.wrappers.motorcontrollers.Sim;
 
 import edu.wpi.first.math.util.Units;
 import com.northeasternrobotics.wrappers.HardwareWrapper;
 import com.northeasternrobotics.wrappers.SimDeviceBanks;
-import com.northeasternrobotics.wrappers.motors.AbstractSimmableMotorController;
+import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 
 import java.util.ArrayList;
 
@@ -38,6 +38,10 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
     public void setInverted(boolean invert) {
         isInverted = invert;
     }
+    @Override
+    public void setNeutralMode(NeutralMode mode) {
+        System.out.println("SimSmartMotor: Neutral Modes Not Implemented");
+    }
 
     @Override
     public void setClosedLoopGains(double p, double i, double d) {
@@ -57,6 +61,11 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
         for (AbstractSimmableMotorController follower : simFollowers) {
             follower.setVoltageCmd(curWindingVoltage);
         }
+    }
+
+    @Override
+    public void overrideDefaultNativeUnitsPerRotation(double nativeUnitsPerRotation) {
+        System.out.println("SimSmartMotor: Native Units Per Rotation Only Impacts Real Motors");
     }
 
     // Returns the current draw of the motor controller from the rest of the electrical system.

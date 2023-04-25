@@ -1,8 +1,10 @@
-package com.northeasternrobotics.wrappers.motors;
+package com.northeasternrobotics.wrappers.motorcontrollers;
 
-import com.northeasternrobotics.wrappers.motors.Sim.SimSmartMotor;
-import com.northeasternrobotics.wrappers.motors.SparkMax.RealSparkMax;
-import com.northeasternrobotics.wrappers.motors.TalonFX.RealTalonFX;
+import com.northeasternrobotics.wrappers.motorcontrollers.PlayingWithFusion.RealVenom;
+import com.northeasternrobotics.wrappers.motorcontrollers.Sim.SimSmartMotor;
+import com.northeasternrobotics.wrappers.motorcontrollers.REV.RealSparkMax;
+import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonFX;
+import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonSRX;
 import edu.wpi.first.wpilibj.RobotBase;
 
 public class WrapperedCANMotorCtrl {
@@ -16,7 +18,7 @@ public class WrapperedCANMotorCtrl {
 
     public WrapperedCANMotorCtrl(String prefix, int can_id, CANMotorCtrlType type) {
 
-        System.out.print("=> Starting motor controller init for " + prefix + " CANID = " + Integer.toString(can_id));
+        System.out.print("=> Starting motor controller init for " + prefix + " CANID = " + can_id);
 
         if (RobotBase.isSimulation()) {
             ctrl = new SimSmartMotor(can_id);
@@ -25,6 +27,11 @@ public class WrapperedCANMotorCtrl {
                 case TALON_FX:
                     ctrl = new RealTalonFX(can_id);
                     break;
+                case TALON_SRX:
+                    ctrl = new RealTalonSRX(can_id);
+                    break;
+                case VENOM:
+                    ctrl = new RealVenom(can_id);
                 case SPARK_MAX:
                     ctrl = new RealSparkMax(can_id);
                     break;
@@ -76,8 +83,8 @@ public class WrapperedCANMotorCtrl {
 
     public enum CANMotorCtrlType {
         TALON_FX,
+        TALON_SRX,
+        VENOM,
         SPARK_MAX
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.northeasternrobotics.wrappers.motors.TalonFX;
+package com.northeasternrobotics.wrappers.motorcontrollers.CTRE;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.*;
@@ -6,20 +6,19 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PowerDistribution;
-import com.northeasternrobotics.wrappers.motors.AbstractSimmableMotorController;
+import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 import com.northeasternrobotics.wrappers.HardwareWrapper;
 
 public class RealTalonFX extends AbstractSimmableMotorController {
 
-    //Falcon-500 specific internal encoder conversion factor
-    public final double NATIVE_UNITS_PER_REV = 2048.0;
-    //CTRE Uses 1023 to represent the full scale voltage
+    // Falcon-500 specific internal encoder conversion factor
+    public double NATIVE_UNITS_PER_REV = 2048.0;
+    // CTRE Uses 1023 to represent the full scale voltage
     public final double CMD_PER_V = 1023.0 / 12.0;
     final int TIMEOUT_MS = 1000;
     final double MAX_VOLTAGE = 14.0;
     final PowerDistribution powerDistribution = new PowerDistribution(1, HardwareWrapper.k_pdbModuleType);
     WPI_TalonFX _talon;
-
 
     public RealTalonFX(int can_id) {
         _talon = new WPI_TalonFX(can_id);
@@ -27,7 +26,6 @@ public class RealTalonFX extends AbstractSimmableMotorController {
         boolean success = false;
 
         _talon.enableVoltageCompensation(true);
-        _talon.setNeutralMode(NeutralMode.Coast);
 
         while (!success) {
             var err0 = _talon.configFactoryDefault();
@@ -43,9 +41,9 @@ public class RealTalonFX extends AbstractSimmableMotorController {
             var err8 = _talon.configVelocityMeasurementWindow(16, TIMEOUT_MS);
             var err9 = _talon.configVoltageCompSaturation(MAX_VOLTAGE, TIMEOUT_MS);
 
-            var err10 = _talon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, 0), TIMEOUT_MS);
+            var err10 = _talon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, 50), TIMEOUT_MS);
 
-            //Reduce CAN bus rates on things we don't quite carea bout
+            // Reduce CAN bus rates on things we don't quite care about
             var err11 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 21, TIMEOUT_MS); //Applied motor output, faults
             var err12 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 61, TIMEOUT_MS); //Position/Velocity
             var err13 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 9999, TIMEOUT_MS); // Quadrature - unused
@@ -53,7 +51,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
             var err15 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_8_PulseWidth, 9999, TIMEOUT_MS); // No idea, not used
             var err16 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 9999, TIMEOUT_MS); // Not using motion magic
             var err17 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 9999, TIMEOUT_MS); // No external feedback sensors connected
-            var err18 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_14_Turn_PIDF1, 9999, TIMEOUT_MS); // No no auxilary PID used
+            var err18 = _talon.setStatusFramePeriod(StatusFrameEnhanced.Status_14_Turn_PIDF1, 9999, TIMEOUT_MS); // No auxiliary PID used
 
             success = (
                     err0 == ErrorCode.OK &&
@@ -91,6 +89,21 @@ public class RealTalonFX extends AbstractSimmableMotorController {
         _talon.setInverted(invert);
     }
 
+    @Override
+    public void setNeutralMode(NeutralMode mode) {
+        switch(mode) {
+            case UseSavedMode:
+                _talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.EEPROMSetting);
+                break;
+            case Coast:
+                _talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
+                break;
+            case Brake:
+                _talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
+                break;
+        }
+    }
+
 
     @Override
     public void setClosedLoopGains(double p, double i, double d) {
@@ -100,7 +113,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
         // d = volts / (rad/sec error) / seconds
 
         // I don't know why we need to do this, but it makes sim line up with real life.
-        p /= 1000;
+        p /= HardwareWrapper.k_hardwareSimLoopSeconds;
 
         //Convert to CTRE Units
         p = (CMD_PER_V) * RevtoCTRENativeUnits(Units.radiansToRotations(p));
@@ -136,6 +149,10 @@ public class RealTalonFX extends AbstractSimmableMotorController {
         _talon.set(TalonFXControlMode.PercentOutput, pctCmd);
     }
 
+    @Override
+    public void overrideDefaultNativeUnitsPerRotation(double nativeUnitsPerRotation) {
+        NATIVE_UNITS_PER_REV = nativeUnitsPerRotation;
+    }
 
     @Override
     public double getCurrent_A() {
@@ -190,6 +207,4 @@ public class RealTalonFX extends AbstractSimmableMotorController {
     public void resetDistance() {
         _talon.setSelectedSensorPosition(0, 0, 50);
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.northeasternrobotics.wrappers.motors.SparkMax;
+package com.northeasternrobotics.wrappers.motorcontrollers.REV;
 
 
 import com.revrobotics.CANSparkMax;
@@ -9,7 +9,7 @@ import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.util.Units;
-import com.northeasternrobotics.wrappers.motors.AbstractSimmableMotorController;
+import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 
 
 public class RealSparkMax extends AbstractSimmableMotorController {
@@ -55,6 +55,19 @@ public class RealSparkMax extends AbstractSimmableMotorController {
         m_motor.setInverted(invert);
     }
 
+    @Override
+    public void setNeutralMode(NeutralMode mode) {
+        switch (mode) {
+            case UseSavedMode:
+            case Coast:
+                m_motor.setIdleMode(IdleMode.kCoast);
+                break;
+            case Brake:
+                m_motor.setIdleMode(IdleMode.kBrake);
+                break;
+        }
+    }
+
 
     @Override
     public void setClosedLoopGains(double p, double i, double d) {
@@ -76,12 +89,16 @@ public class RealSparkMax extends AbstractSimmableMotorController {
 
     @Override
     public void setClosedLoopCmd(double velocityCmd_radpersec, double arbFF_V) {
-
         m_pidController.setReference(Units.radiansPerSecondToRotationsPerMinute(velocityCmd_radpersec),
                 CANSparkMax.ControlType.kVelocity,
                 0,
                 arbFF_V,
                 SparkMaxPIDController.ArbFFUnits.kVoltage);
+    }
+
+    @Override
+    public void overrideDefaultNativeUnitsPerRotation(double nativeUnitsPerRotation) {
+        System.out.println("Spark Max: Native Units Per Rotation Does Not Apply");
     }
 
 
