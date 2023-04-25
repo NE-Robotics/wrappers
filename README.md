@@ -1,7 +1,7 @@
 # Hardware Wrappers
 Hardware wrappers for FRC parts, controllers, &amp; encoders
 
-Designed to provide easy sim real mixing by supporting simulation of your entire robot through a model, also allows for extremely easy swaps between Talon & Spark based motors, support for venom motors will be coming soon.
+Designed to provide easy sim real mixing by supporting simulation of your entire robot through a model
 
 ## Use
 Hop on over to build.gradle inside of repositories add
@@ -18,6 +18,23 @@ and inside of dependencies add
 ```gradle
 implementation 'com.northeasternrobotics.wrappers:wrappers:0.0.1'
 ```
+
+## Supported Hardware
+#### Encoders
+- CANCoder
+- SRXEncoder
+- ThriftyEncoder
+- SimSwerveAzimuthEncoder
+
+#### Gyros
+- ADXRS453
+- NavX
+- SimGyro
+
+#### Motor Controllers
+- SparkMax
+- TalonFX
+- SimSmartMotor
 
 ### Note
 yes I'm borrowing Mechanical Advantage's bot so anyone can use this, you can also put your own username and a token with package read privileges if you would prefer
