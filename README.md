@@ -34,6 +34,8 @@ implementation 'com.northeasternrobotics.wrappers:wrappers:0.0.1'
 #### Motor Controllers
 - SparkMax
 - TalonFX
+- TalonSRX
+- Venom
 - SimSmartMotor
 
 ### Note
