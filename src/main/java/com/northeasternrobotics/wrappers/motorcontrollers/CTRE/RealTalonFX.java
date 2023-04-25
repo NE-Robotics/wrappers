@@ -16,7 +16,6 @@ public class RealTalonFX extends AbstractSimmableMotorController {
     // CTRE Uses 1023 to represent the full scale voltage
     public final double CMD_PER_V = 1023.0 / 12.0;
     final int TIMEOUT_MS = 1000;
-    final double MAX_VOLTAGE = 14.0;
     final PowerDistribution powerDistribution = new PowerDistribution(1, HardwareWrapper.k_pdbModuleType);
     WPI_TalonFX _talon;
 
@@ -39,7 +38,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
             var err6 = _talon.configPeakOutputReverse(-1, TIMEOUT_MS);
             var err7 = _talon.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_20Ms, TIMEOUT_MS);
             var err8 = _talon.configVelocityMeasurementWindow(16, TIMEOUT_MS);
-            var err9 = _talon.configVoltageCompSaturation(MAX_VOLTAGE, TIMEOUT_MS);
+            var err9 = _talon.configVoltageCompSaturation(HardwareWrapper.k_maxBatteryVoltage, TIMEOUT_MS);
 
             var err10 = _talon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, 50), TIMEOUT_MS);
 
@@ -136,7 +135,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
 
     @Override
     public void setVoltageCmd(double cmd_v) {
-        var pctCmd = cmd_v / MAX_VOLTAGE;
+        var pctCmd = cmd_v / HardwareWrapper.k_maxBatteryVoltage;
 
         if (pctCmd > 1.0) {
             pctCmd = 1.0;

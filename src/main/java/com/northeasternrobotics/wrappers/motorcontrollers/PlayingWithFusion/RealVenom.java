@@ -1,12 +1,12 @@
 package com.northeasternrobotics.wrappers.motorcontrollers.PlayingWithFusion;
 
+import com.northeasternrobotics.wrappers.HardwareWrapper;
 import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonFX;
 import com.playingwithfusion.CANVenom;
 import edu.wpi.first.math.util.Units;
 
 public class RealVenom extends AbstractSimmableMotorController {
-    private final double MAX_VOLTAGE = 14.0;
     CANVenom _venom;
     public RealVenom(int can_id) {
         _venom = new CANVenom(can_id);
@@ -46,7 +46,7 @@ public class RealVenom extends AbstractSimmableMotorController {
 
     @Override
     public void setVoltageCmd(double cmd_v) {
-        var pctCmd = cmd_v / MAX_VOLTAGE;
+        var pctCmd = cmd_v / HardwareWrapper.k_maxBatteryVoltage;
 
         if (pctCmd > 1.0) {
             pctCmd = 1.0;
