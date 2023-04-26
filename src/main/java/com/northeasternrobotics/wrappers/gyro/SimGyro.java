@@ -46,6 +46,7 @@ public class SimGyro extends AbstractGyro {
 
     /**
      * Simulates the gyro updating
+     *
      * @param newRate_radpersec the new rate of the gyro in rad/sec
      */
     public void simUpdate(double newRate_radpersec) {
@@ -55,6 +56,7 @@ public class SimGyro extends AbstractGyro {
 
     /**
      * Simulates the gyro setting the angle
+     *
      * @param newAngle_rad the new angle of the gyro in rad
      */
     public void simSetAngle(double newAngle_rad) {

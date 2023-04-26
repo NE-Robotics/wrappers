@@ -14,6 +14,7 @@ public class SimSwerveAzmthEncoder extends AbstractSwerveAzmthEncoder {
 
     /**
      * Constructor for SimSwerveAzmthEncoder
+     *
      * @param port the DIO port the encoder is plugged into
      */
     public SimSwerveAzmthEncoder(int port) {
@@ -22,6 +23,7 @@ public class SimSwerveAzmthEncoder extends AbstractSwerveAzmthEncoder {
 
     /**
      * Simulates the encoder updating
+     *
      * @param curAngle_rad the new angle of the encoder in rad
      */
     public void setRawAngle(double curAngle_rad) {

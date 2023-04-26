@@ -16,6 +16,7 @@ public class RealThriftyEncoder extends AbstractSwerveAzmthEncoder {
 
     /**
      * Constructor for ThriftyEncoder
+     *
      * @param port the DIO port the encoder is plugged into
      */
     public RealThriftyEncoder(int port) {

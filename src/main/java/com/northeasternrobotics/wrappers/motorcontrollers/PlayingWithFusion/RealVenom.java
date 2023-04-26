@@ -14,6 +14,7 @@ public class RealVenom extends AbstractSimmableMotorController {
 
     /**
      * Constructor for Venom
+     *
      * @param can_id the CAN ID of the Venom
      */
     public RealVenom(int can_id) {

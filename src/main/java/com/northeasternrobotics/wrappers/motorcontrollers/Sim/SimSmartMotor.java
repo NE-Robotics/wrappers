@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class SimSmartMotor extends AbstractSimmableMotorController {
 
     final double CURRENT_LIM_I_GAIN = 0.02;
-    /** List of followers */
+    /**
+     * List of followers
+     */
     public ArrayList<SimSmartMotor> simFollowers = new ArrayList<SimSmartMotor>();
     boolean isInverted;
     double kP;
@@ -32,6 +34,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Constructor for SimSmartMotor
+     *
      * @param can_id the CAN ID of the SimSmartMotor
      */
     public SimSmartMotor(int can_id) {
@@ -91,6 +94,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Sets the true velocity of the motor in radians per second
+     *
      * @param velocity_radpersec velocity of the motor in radians per second
      */
     public void sim_setActualVelocity(double velocity_radpersec) {
@@ -100,6 +104,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Sets the true position of the motor in radians
+     *
      * @param pos_rad position of the motor in radians
      */
     public void sim_setActualPosition(double pos_rad) {
@@ -109,6 +114,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Get the voltage applied to the motor windings
+     *
      * @return The voltage applied to the motor windings
      */
     public double sim_getWindingVoltage() {
@@ -117,6 +123,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Set the supply voltage to the motor controller
+     *
      * @param supply_V The supply voltage to the motor controller
      */
     public void sim_setSupplyVoltage(double supply_V) {
@@ -125,6 +132,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
 
     /**
      * Set the current flowing through the motor windings
+     *
      * @param cur_A The current flowing through the motor windings
      */
     public void sim_setCurrent(double cur_A) {

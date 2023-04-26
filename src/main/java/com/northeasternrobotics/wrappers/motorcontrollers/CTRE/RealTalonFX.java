@@ -14,16 +14,17 @@ import edu.wpi.first.wpilibj.PowerDistribution;
  */
 public class RealTalonFX extends AbstractSimmableMotorController {
 
-    // CTRE Uses 1023 to represent the full scale voltage
-    private final double CMD_PER_V = 1023.0 / 12.0;
     final int TIMEOUT_MS = 1000;
     final PowerDistribution powerDistribution = new PowerDistribution(1, HardwareWrapper.k_pdbModuleType);
+    // CTRE Uses 1023 to represent the full scale voltage
+    private final double CMD_PER_V = 1023.0 / 12.0;
+    WPI_TalonFX _talon;
     // Falcon-500 specific internal encoder conversion factor
     private double NATIVE_UNITS_PER_REV = 2048.0;
-    WPI_TalonFX _talon;
 
     /**
      * Constructs a TalonFX controller
+     *
      * @param can_id The CAN ID of the TalonFX
      */
     public RealTalonFX(int can_id) {

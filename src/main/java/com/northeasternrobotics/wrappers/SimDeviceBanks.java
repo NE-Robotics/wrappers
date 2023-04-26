@@ -20,8 +20,9 @@ public class SimDeviceBanks {
 
     /**
      * Adds a device to the CAN bank
+     *
      * @param newDevice The device to add
-     * @param id The CAN ID of the device
+     * @param id        The CAN ID of the device
      */
     public static void addCANDevice(Object newDevice, int id) {
 
@@ -34,6 +35,7 @@ public class SimDeviceBanks {
 
     /**
      * Returns the device connected to the given CAN ID
+     *
      * @param id CAN ID of the device
      * @return The device connected to the given CAN ID
      */
@@ -46,8 +48,9 @@ public class SimDeviceBanks {
 
     /**
      * Adds a device to the DI bank
+     *
      * @param newDevice The device to add
-     * @param port The port of the device
+     * @param port      The port of the device
      */
     public static void addDIDevice(Object newDevice, int port) {
         if (DIBank.containsKey(port)) {
@@ -58,6 +61,7 @@ public class SimDeviceBanks {
 
     /**
      * Returns the device connected to the given digital input port
+     *
      * @param port DIO port of the device
      * @return The device connected to the given digital input port
      */
@@ -70,8 +74,9 @@ public class SimDeviceBanks {
 
     /**
      * Adds a device to the SPI bank
+     *
      * @param newDevice The device to add
-     * @param cs The chip select port of the device
+     * @param cs        The chip select port of the device
      */
     public static void addSPIDevice(Object newDevice, int cs) {
         if (SPIBank.containsKey(cs)) {
@@ -82,6 +87,7 @@ public class SimDeviceBanks {
 
     /**
      * Returns the device connected to the given SPI chip select port
+     *
      * @param cs Slot of the device
      * @return The device connected to the given SPI chip select port
      */
@@ -92,7 +98,9 @@ public class SimDeviceBanks {
         return SPIBank.get(cs);
     }
 
-    /** Clears all devices from the simulation */
+    /**
+     * Clears all devices from the simulation
+     */
     public static void clearAllBanks() {
         DIBank.clear();
         SPIBank.clear();

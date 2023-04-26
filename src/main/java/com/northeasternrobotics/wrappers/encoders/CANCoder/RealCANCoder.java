@@ -18,9 +18,11 @@ public class RealCANCoder extends AbstractSwerveAzmthEncoder {
 
     boolean magnetFaulted;
 
-    /** CAN Coder constructor
+    /**
+     * CAN Coder constructor
+     *
      * @param can_id the CAN ID of the CANCoder
-     * */
+     */
     public RealCANCoder(int can_id) {
 
         cancoder = new CANCoder(can_id);

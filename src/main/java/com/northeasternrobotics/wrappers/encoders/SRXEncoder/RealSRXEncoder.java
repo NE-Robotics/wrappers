@@ -16,6 +16,7 @@ public class RealSRXEncoder extends AbstractSwerveAzmthEncoder {
 
     /**
      * Constructs a SRX encoder.
+     *
      * @param port the DIO port the encoder is plugged into
      */
     public RealSRXEncoder(int port) {

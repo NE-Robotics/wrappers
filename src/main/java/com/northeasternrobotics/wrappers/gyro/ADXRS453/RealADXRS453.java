@@ -9,10 +9,14 @@ import edu.wpi.first.wpilibj.SPI.Port;
  * ADXRS453 Wrappered gyroscope implementation
  */
 public class RealADXRS453 extends AbstractGyro {
-    /** The gyro object used */
+    /**
+     * The gyro object used
+     */
     ADXRS450_Gyro realGyro;
 
-    /** Gyro constructor, uses Onboard CS0 port */
+    /**
+     * Gyro constructor, uses Onboard CS0 port
+     */
     public RealADXRS453() {
         realGyro = new ADXRS450_Gyro(Port.kOnboardCS0);
         realGyro.calibrate();

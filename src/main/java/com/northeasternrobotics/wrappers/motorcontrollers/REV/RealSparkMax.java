@@ -22,6 +22,7 @@ public class RealSparkMax extends AbstractSimmableMotorController {
 
     /**
      * Constructs a Spark Max motor controller.
+     *
      * @param can_id the CAN ID of the motor controller
      */
     public RealSparkMax(int can_id) {

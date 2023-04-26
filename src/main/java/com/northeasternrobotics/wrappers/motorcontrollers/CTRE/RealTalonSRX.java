@@ -24,6 +24,7 @@ public class RealTalonSRX extends AbstractSimmableMotorController {
 
     /**
      * Constructor for the TalonSRX wrapper.
+     *
      * @param can_id The CAN ID of the TalonSRX.
      */
     public RealTalonSRX(int can_id) {
