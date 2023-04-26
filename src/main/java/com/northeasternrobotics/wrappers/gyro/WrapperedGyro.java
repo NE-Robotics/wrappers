@@ -4,6 +4,9 @@ import com.northeasternrobotics.wrappers.gyro.ADXRS453.RealADXRS453;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.RobotBase;
 
+/**
+ * Wrapper for gyroscopes
+ */
 public class WrapperedGyro {
     AbstractGyro gyro;
     double offset_rad = 0;
@@ -11,6 +14,7 @@ public class WrapperedGyro {
 
     /**
      * Constructor for a wrapped gyroscope
+     *
      * @param type Type of gyroscope to use
      */
     public WrapperedGyro(GyroType type) {
@@ -36,6 +40,7 @@ public class WrapperedGyro {
 
     /**
      * Resets the gyro to a given angle
+     *
      * @param curAngle_rad Angle to reset the gyro to
      */
     public void reset(double curAngle_rad) {
@@ -82,7 +87,13 @@ public class WrapperedGyro {
      * Enum for the type of gyroscope to use
      */
     public enum GyroType {
+        /**
+         * The ADXRS453 gyroscope, standard SPI plugin
+         */
         ADXRS453,
+        /**
+         * NavX gyroscope, on the MXP port
+         */
         NAVX
     }
 

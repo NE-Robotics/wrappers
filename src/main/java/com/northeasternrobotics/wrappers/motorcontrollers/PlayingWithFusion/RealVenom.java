@@ -6,8 +6,16 @@ import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonFX;
 import com.playingwithfusion.CANVenom;
 import edu.wpi.first.math.util.Units;
 
+/**
+ * Wrapper for the Venom
+ */
 public class RealVenom extends AbstractSimmableMotorController {
     CANVenom _venom;
+
+    /**
+     * Constructor for Venom
+     * @param can_id the CAN ID of the Venom
+     */
     public RealVenom(int can_id) {
         _venom = new CANVenom(can_id);
     }
@@ -19,7 +27,7 @@ public class RealVenom extends AbstractSimmableMotorController {
 
     @Override
     public void setNeutralMode(NeutralMode mode) {
-        switch(mode) {
+        switch (mode) {
             case UseSavedMode:
             case Coast:
                 _venom.setBrakeCoastMode(CANVenom.BrakeCoastMode.Coast);
@@ -79,7 +87,7 @@ public class RealVenom extends AbstractSimmableMotorController {
         if (leader.getClass() == RealVenom.class) {
             _venom.follow(((RealVenom) leader)._venom);
         } else {
-            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonFX.class.toString());
+            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonFX.class);
         }
     }
 

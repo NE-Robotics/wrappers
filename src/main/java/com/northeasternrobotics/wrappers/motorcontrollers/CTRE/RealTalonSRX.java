@@ -11,14 +11,21 @@ import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorC
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
+/**
+ * Wrapper for the TalonSRX motor controller.
+ */
 public class RealTalonSRX extends AbstractSimmableMotorController {
     // CTRE Uses 1023 to represent the full scale voltage
-    public final double CMD_PER_V = 1023.0 / 12.0;
+    private final double CMD_PER_V = 1023.0 / 12.0;
     private final int TIMEOUT_MS = 1000;
-    private double NATIVE_UNITS_PER_REV = 4096.0;
     private final PowerDistribution powerDistribution = new PowerDistribution(1, HardwareWrapper.k_pdbModuleType);
     WPI_TalonSRX _talon;
+    private double NATIVE_UNITS_PER_REV = 4096.0;
 
+    /**
+     * Constructor for the TalonSRX wrapper.
+     * @param can_id The CAN ID of the TalonSRX.
+     */
     public RealTalonSRX(int can_id) {
         _talon = new WPI_TalonSRX(can_id);
 
@@ -53,25 +60,25 @@ public class RealTalonSRX extends AbstractSimmableMotorController {
 
             success = (
                     err0 == ErrorCode.OK &&
-                    err1 == ErrorCode.OK &&
-                    err2 == ErrorCode.OK &&
-                    err3 == ErrorCode.OK &&
-                    err4 == ErrorCode.OK &&
-                    err5 == ErrorCode.OK &&
-                    err6 == ErrorCode.OK &&
-                    err7 == ErrorCode.OK &&
-                    err8 == ErrorCode.OK &&
-                    err9 == ErrorCode.OK &&
-                    err10 == ErrorCode.OK &&
-                    err11 == ErrorCode.OK &&
-                    err12 == ErrorCode.OK &&
-                    err13 == ErrorCode.OK &&
-                    err14 == ErrorCode.OK &&
-                    err15 == ErrorCode.OK &&
-                    err16 == ErrorCode.OK &&
-                    err17 == ErrorCode.OK &&
-                    err18 == ErrorCode.OK &&
-                    err19 == ErrorCode.OK
+                            err1 == ErrorCode.OK &&
+                            err2 == ErrorCode.OK &&
+                            err3 == ErrorCode.OK &&
+                            err4 == ErrorCode.OK &&
+                            err5 == ErrorCode.OK &&
+                            err6 == ErrorCode.OK &&
+                            err7 == ErrorCode.OK &&
+                            err8 == ErrorCode.OK &&
+                            err9 == ErrorCode.OK &&
+                            err10 == ErrorCode.OK &&
+                            err11 == ErrorCode.OK &&
+                            err12 == ErrorCode.OK &&
+                            err13 == ErrorCode.OK &&
+                            err14 == ErrorCode.OK &&
+                            err15 == ErrorCode.OK &&
+                            err16 == ErrorCode.OK &&
+                            err17 == ErrorCode.OK &&
+                            err18 == ErrorCode.OK &&
+                            err19 == ErrorCode.OK
             );
 
             if (!success) {
@@ -87,7 +94,7 @@ public class RealTalonSRX extends AbstractSimmableMotorController {
 
     @Override
     public void setNeutralMode(NeutralMode mode) {
-        switch(mode) {
+        switch (mode) {
             case UseSavedMode:
                 _talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.EEPROMSetting);
                 break;
@@ -164,7 +171,7 @@ public class RealTalonSRX extends AbstractSimmableMotorController {
         if (leader.getClass() == RealTalonSRX.class) {
             _talon.follow(((RealTalonSRX) leader)._talon);
         } else {
-            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonSRX.class.toString());
+            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonSRX.class);
         }
     }
 

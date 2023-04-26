@@ -1,12 +1,15 @@
 package com.northeasternrobotics.wrappers.motorcontrollers;
 
-import com.northeasternrobotics.wrappers.motorcontrollers.PlayingWithFusion.RealVenom;
-import com.northeasternrobotics.wrappers.motorcontrollers.Sim.SimSmartMotor;
-import com.northeasternrobotics.wrappers.motorcontrollers.REV.RealSparkMax;
 import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonFX;
 import com.northeasternrobotics.wrappers.motorcontrollers.CTRE.RealTalonSRX;
+import com.northeasternrobotics.wrappers.motorcontrollers.PlayingWithFusion.RealVenom;
+import com.northeasternrobotics.wrappers.motorcontrollers.REV.RealSparkMax;
+import com.northeasternrobotics.wrappers.motorcontrollers.Sim.SimSmartMotor;
 import edu.wpi.first.wpilibj.RobotBase;
 
+/**
+ * Wrapper for a CAN motor controller
+ */
 public class WrapperedCANMotorCtrl {
 
     AbstractSimmableMotorController ctrl;
@@ -18,9 +21,10 @@ public class WrapperedCANMotorCtrl {
 
     /**
      * Constructor for a wrapped CAN motor controller
+     *
      * @param prefix Readable name for the motor controller
      * @param can_id CAN ID of the motor controller
-     * @param type Controller type for the real motor controller
+     * @param type   Controller type for the real motor controller
      */
     public WrapperedCANMotorCtrl(String prefix, int can_id, CANMotorCtrlType type) {
 
@@ -59,6 +63,7 @@ public class WrapperedCANMotorCtrl {
 
     /**
      * Sets the motor to inverted or not
+     *
      * @param invert true if inverted
      */
     public void setInverted(boolean invert) {
@@ -67,6 +72,7 @@ public class WrapperedCANMotorCtrl {
 
     /**
      * Sets the closed loop gain values for P I D
+     *
      * @param p proportional term
      * @param i integral term
      * @param d derivative term
@@ -77,8 +83,9 @@ public class WrapperedCANMotorCtrl {
 
     /**
      * Sets the closed loop command for the motor in velocity and arbitrary feed forward
+     *
      * @param velocityCmd_radpersec desired velocity in radians per second
-     * @param arbFF_V arbitrary feed forward in volts
+     * @param arbFF_V               arbitrary feed forward in volts
      */
     public void setClosedLoopCmd(double velocityCmd_radpersec, double arbFF_V) {
         ctrl.setClosedLoopCmd(velocityCmd_radpersec, arbFF_V);
@@ -87,6 +94,7 @@ public class WrapperedCANMotorCtrl {
 
     /**
      * Sets the voltage command for the motor
+     *
      * @param cmd_V desired voltage in volts
      */
     public void setVoltageCmd(double cmd_V) {
@@ -125,9 +133,21 @@ public class WrapperedCANMotorCtrl {
      * Motor controller types for real robot
      */
     public enum CANMotorCtrlType {
+        /**
+         * Talon FX motor controller, ex Falcon 500
+         */
         TALON_FX,
+        /**
+         * Talon SRX motor controller, ex Talon SRX connected to a BAG motor
+         */
         TALON_SRX,
+        /**
+         * Venom motor controller CIM system
+         */
         VENOM,
+        /**
+         * Spark Max motor controller, ex NEO 550
+         */
         SPARK_MAX
     }
 }

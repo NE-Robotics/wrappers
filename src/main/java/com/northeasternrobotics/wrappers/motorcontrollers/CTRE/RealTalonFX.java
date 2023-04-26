@@ -4,21 +4,28 @@ import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
+import com.northeasternrobotics.wrappers.HardwareWrapper;
+import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PowerDistribution;
-import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
-import com.northeasternrobotics.wrappers.HardwareWrapper;
 
+/**
+ * Wrapper for the TalonFX motor controller.
+ */
 public class RealTalonFX extends AbstractSimmableMotorController {
 
-    // Falcon-500 specific internal encoder conversion factor
-    public double NATIVE_UNITS_PER_REV = 2048.0;
     // CTRE Uses 1023 to represent the full scale voltage
-    public final double CMD_PER_V = 1023.0 / 12.0;
+    private final double CMD_PER_V = 1023.0 / 12.0;
     final int TIMEOUT_MS = 1000;
     final PowerDistribution powerDistribution = new PowerDistribution(1, HardwareWrapper.k_pdbModuleType);
+    // Falcon-500 specific internal encoder conversion factor
+    private double NATIVE_UNITS_PER_REV = 2048.0;
     WPI_TalonFX _talon;
 
+    /**
+     * Constructs a TalonFX controller
+     * @param can_id The CAN ID of the TalonFX
+     */
     public RealTalonFX(int can_id) {
         _talon = new WPI_TalonFX(can_id);
 
@@ -90,7 +97,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
 
     @Override
     public void setNeutralMode(NeutralMode mode) {
-        switch(mode) {
+        switch (mode) {
             case UseSavedMode:
                 _talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.EEPROMSetting);
                 break;
@@ -171,7 +178,7 @@ public class RealTalonFX extends AbstractSimmableMotorController {
         if (leader.getClass() == RealTalonFX.class) {
             _talon.follow(((RealTalonFX) leader)._talon);
         } else {
-            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonFX.class.toString());
+            throw new IllegalArgumentException(leader.getClass().toString() + " cannot be followed by a " + RealTalonFX.class);
         }
     }
 

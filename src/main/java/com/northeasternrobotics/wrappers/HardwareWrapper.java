@@ -2,12 +2,30 @@ package com.northeasternrobotics.wrappers;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 
+/**
+ * Wrapper class for hardware contains things like PDB type, hardware simulation speed, and periodic loop speed
+ */
 public class HardwareWrapper {
-    public static PowerDistribution.ModuleType k_pdbModuleType = PowerDistribution.ModuleType.kCTRE;
-    public static double k_hardwareSimLoopSeconds = 0.001;
-    public static double k_periodicLoopSeconds = 0.02;
-    public static double k_maxBatteryVoltage = 14.0;
     private static final double k_safetyMargin = 0.8;
+    /**
+     * The type of Power Distribution Module your robot uses, default is CTRE
+     */
+    public static PowerDistribution.ModuleType k_pdbModuleType = PowerDistribution.ModuleType.kCTRE;
+
+    /**
+     * The speed at which to run hardware sim loop in seconds, default is 0.001 = 1000 times per second
+     */
+    public static double k_hardwareSimLoopSeconds = 0.001;
+
+    /**
+     * The speed at which to run periodic loop in seconds, default is 0.02 = 50 times per second
+     */
+    public static double k_periodicLoopSeconds = 0.02;
+
+    /**
+     * The maximum voltage of the battery, default is 14.0
+     */
+    public static double k_maxBatteryVoltage = 14.0;
 
     /**
      * @param moduleType, the type of Power Distribution Module your robot uses
@@ -32,6 +50,7 @@ public class HardwareWrapper {
 
     /**
      * Configuring this to your battery increases the accuracy of voltage commands with Talons and Venom motors
+     *
      * @param maxVoltage, the maximum voltage of the battery
      */
     public static void setMaximumBatteryVoltage(double maxVoltage) {

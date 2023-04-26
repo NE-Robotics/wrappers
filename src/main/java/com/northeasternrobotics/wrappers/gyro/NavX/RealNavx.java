@@ -1,14 +1,20 @@
 package com.northeasternrobotics.wrappers.gyro.NavX;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.northeasternrobotics.wrappers.gyro.AbstractGyro;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.SPI.Port;
-import com.northeasternrobotics.wrappers.gyro.AbstractGyro;
 
+/**
+ * Wrapper for the NavX gyro.
+ */
 public class RealNavx extends AbstractGyro {
 
     AHRS ahrs;
 
+    /**
+     * Constructs a NavX gyro. defaults to MXP port
+     */
     public RealNavx() {
         ahrs = new AHRS(Port.kMXP);
         this.calibrate();

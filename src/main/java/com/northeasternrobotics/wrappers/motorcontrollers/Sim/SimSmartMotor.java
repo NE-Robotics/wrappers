@@ -1,9 +1,9 @@
 package com.northeasternrobotics.wrappers.motorcontrollers.Sim;
 
-import edu.wpi.first.math.util.Units;
 import com.northeasternrobotics.wrappers.HardwareWrapper;
 import com.northeasternrobotics.wrappers.SimDeviceBanks;
 import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
+import edu.wpi.first.math.util.Units;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class SimSmartMotor extends AbstractSimmableMotorController {
 
     final double CURRENT_LIM_I_GAIN = 0.02;
+    /** List of followers */
     public ArrayList<SimSmartMotor> simFollowers = new ArrayList<SimSmartMotor>();
     boolean isInverted;
     double kP;
@@ -29,7 +30,10 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
     private double curSupplyVoltage = 12.0;
     private double curPos_rad;
 
-
+    /**
+     * Constructor for SimSmartMotor
+     * @param can_id the CAN ID of the SimSmartMotor
+     */
     public SimSmartMotor(int can_id) {
         SimDeviceBanks.addCANDevice(this, can_id);
     }
@@ -38,6 +42,7 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
     public void setInverted(boolean invert) {
         isInverted = invert;
     }
+
     @Override
     public void setNeutralMode(NeutralMode mode) {
         System.out.println("SimSmartMotor: Neutral Modes Not Implemented");
@@ -84,25 +89,44 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
         return curPos_rad * (isInverted ? -1.0 : 1.0);
     }
 
+    /**
+     * Sets the true velocity of the motor in radians per second
+     * @param velocity_radpersec velocity of the motor in radians per second
+     */
     public void sim_setActualVelocity(double velocity_radpersec) {
         curVel_radpersec = velocity_radpersec;
         curPos_rad += curVel_radpersec * HardwareWrapper.k_hardwareSimLoopSeconds;
     }
 
+    /**
+     * Sets the true position of the motor in radians
+     * @param pos_rad position of the motor in radians
+     */
     public void sim_setActualPosition(double pos_rad) {
         curVel_radpersec = (pos_rad - curPos_rad) / HardwareWrapper.k_hardwareSimLoopSeconds;
         curPos_rad = pos_rad;
     }
 
+    /**
+     * Get the voltage applied to the motor windings
+     * @return The voltage applied to the motor windings
+     */
     public double sim_getWindingVoltage() {
         return curWindingVoltage * curLimitFactor;
     }
 
+    /**
+     * Set the supply voltage to the motor controller
+     * @param supply_V The supply voltage to the motor controller
+     */
     public void sim_setSupplyVoltage(double supply_V) {
         curSupplyVoltage = supply_V;
     }
 
-    // Set the current flowing through the motor windings
+    /**
+     * Set the current flowing through the motor windings
+     * @param cur_A The current flowing through the motor windings
+     */
     public void sim_setCurrent(double cur_A) {
         curCurrent = cur_A * Math.signum(curSupplyVoltage); //H bridge will reverse current flow
     }
@@ -117,6 +141,9 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
         }
     }
 
+    /**
+     * A rough approximation of the current limiting behavior of a real smart motor controllers
+     */
     public void sim_updateCurrentLimit() {
         // whelp. Super rough approximation of a current limit. Just an I gain on
         // whether we're above the current limit. Should be updated faster

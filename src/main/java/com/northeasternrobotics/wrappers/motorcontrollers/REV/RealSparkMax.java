@@ -1,6 +1,7 @@
 package com.northeasternrobotics.wrappers.motorcontrollers.REV;
 
 
+import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -9,16 +10,20 @@ import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.util.Units;
-import com.northeasternrobotics.wrappers.motorcontrollers.AbstractSimmableMotorController;
 
-
+/**
+ * Wrapper for the REV Spark Max motor controller.
+ */
 public class RealSparkMax extends AbstractSimmableMotorController {
 
-    private CANSparkMax m_motor;
-    private SparkMaxPIDController m_pidController;
-    private RelativeEncoder m_encoder;
+    private final CANSparkMax m_motor;
+    private final SparkMaxPIDController m_pidController;
+    private final RelativeEncoder m_encoder;
 
-
+    /**
+     * Constructs a Spark Max motor controller.
+     * @param can_id the CAN ID of the motor controller
+     */
     public RealSparkMax(int can_id) {
         m_motor = new CANSparkMax(can_id, MotorType.kBrushless);
 

@@ -8,6 +8,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 
+/**
+ * Wrapper for swerve azimuth encoders / absolute through bore encoders
+ */
 public class WrapperedSwerveAzimuthEncoder {
     AbstractSwerveAzmthEncoder enc;
     double curAngleRad;
@@ -16,9 +19,10 @@ public class WrapperedSwerveAzimuthEncoder {
 
     /**
      * Constructor for a wrapped swerve azimuth encoder, or general through bore encoder
-     * @param type Type of swerve azimuth/absolute through bore encoder to use
-     * @param prefix Prefix for the encoder
-     * @param id ID of the encoder
+     *
+     * @param type                   Type of swerve azimuth/absolute through bore encoder to use
+     * @param prefix                 Prefix for the encoder
+     * @param id                     ID of the encoder
      * @param dfltMountingOffset_rad Default mounting offset of the encoder in radians
      */
     public WrapperedSwerveAzimuthEncoder(SwerveAzmthEncType type, String prefix, int id, double dfltMountingOffset_rad) {
@@ -64,20 +68,29 @@ public class WrapperedSwerveAzimuthEncoder {
         return new Rotation2d(this.getAngle_rad());
     }
 
-    /**
-     * Encoder types for real robot
-     */
-    public enum SwerveAzmthEncType {
-        SRXEncoder,
-        CANCoder,
-        Thrifty
-    }
-    
     private double wrapAngleDeg(double angle) {
         angle %= 360;
         angle = angle > 180 ? angle - 360 : angle;
         angle = angle < -180 ? angle + 360 : angle;
         return angle;
+    }
+
+    /**
+     * Encoder types for real robot
+     */
+    public enum SwerveAzmthEncType {
+        /**
+         * CTRE SRX Mag Encoder
+         */
+        SRXEncoder,
+        /**
+         * CTRE CanCoder
+         */
+        CANCoder,
+        /**
+         * Thrifty bot swerve encoder
+         */
+        Thrifty
     }
 
 

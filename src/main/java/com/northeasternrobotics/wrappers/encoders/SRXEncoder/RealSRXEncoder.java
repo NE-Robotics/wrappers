@@ -4,6 +4,9 @@ import com.northeasternrobotics.wrappers.encoders.AbstractSwerveAzmthEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycle;
 
+/**
+ * Wrapper for the SRX encoder.
+ */
 public class RealSRXEncoder extends AbstractSwerveAzmthEncoder {
 
     DigitalInput m_digitalInput;
@@ -11,6 +14,10 @@ public class RealSRXEncoder extends AbstractSwerveAzmthEncoder {
 
     double freq;
 
+    /**
+     * Constructs a SRX encoder.
+     * @param port the DIO port the encoder is plugged into
+     */
     public RealSRXEncoder(int port) {
         m_digitalInput = new DigitalInput(port);
         m_dutyCycle = new DutyCycle(m_digitalInput);

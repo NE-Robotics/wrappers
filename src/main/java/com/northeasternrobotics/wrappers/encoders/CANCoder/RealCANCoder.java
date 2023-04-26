@@ -6,8 +6,10 @@ import com.ctre.phoenix.sensors.MagnetFieldStrength;
 import com.ctre.phoenix.sensors.SensorTimeBase;
 import com.northeasternrobotics.wrappers.encoders.AbstractSwerveAzmthEncoder;
 
+/**
+ * Wrapper for a CANCoder.
+ */
 public class RealCANCoder extends AbstractSwerveAzmthEncoder {
-
     CANCoder cancoder;
 
     double supplyVoltage;
@@ -16,6 +18,9 @@ public class RealCANCoder extends AbstractSwerveAzmthEncoder {
 
     boolean magnetFaulted;
 
+    /** CAN Coder constructor
+     * @param can_id the CAN ID of the CANCoder
+     * */
     public RealCANCoder(int can_id) {
 
         cancoder = new CANCoder(can_id);
