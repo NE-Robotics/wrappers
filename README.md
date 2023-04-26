@@ -16,7 +16,7 @@ maven {
 ```
 and inside of dependencies add
 ```gradle
-implementation 'com.northeasternrobotics.wrappers:wrappers:0.0.1'
+implementation 'com.northeasternrobotics.wrappers:wrappers:0.1.+'
 ```
 
 ## Supported Hardware
