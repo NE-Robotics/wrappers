@@ -38,6 +38,11 @@ public class RealCANCoder extends AbstractSwerveAzmthEncoder {
     }
 
     @Override
+    public Object getUnwrappedEncoder() {
+        return cancoder;
+    }
+
+    @Override
     public double getRawAngle_rad() {
         supplyVoltage = cancoder.getBusVoltage();
 

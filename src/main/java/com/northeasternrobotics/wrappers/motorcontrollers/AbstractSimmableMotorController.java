@@ -5,6 +5,11 @@ package com.northeasternrobotics.wrappers.motorcontrollers;
  */
 public abstract class AbstractSimmableMotorController {
     /**
+     * @return the wrapped motor controller object
+     */
+    public abstract Object getUnwrappedMotor();
+
+    /**
      * @param invert if set to true inverts the motors direction
      */
     public abstract void setInverted(boolean invert);

@@ -89,6 +89,11 @@ public class RealTalonSRX extends AbstractSimmableMotorController {
     }
 
     @Override
+    public Object getUnwrappedMotor() {
+        return _talon;
+    }
+
+    @Override
     public void setInverted(boolean invert) {
         _talon.setInverted(invert);
     }

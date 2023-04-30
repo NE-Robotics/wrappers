@@ -5,6 +5,10 @@ package com.northeasternrobotics.wrappers.gyro;
  */
 public abstract class AbstractGyro {
     /**
+     * @return gyro object
+     */
+    public abstract Object getUnwrappedGyro();
+    /**
      * Resets the gyro to a heading of zero.
      */
     public abstract void reset();

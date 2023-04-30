@@ -9,4 +9,9 @@ public abstract class AbstractSwerveAzmthEncoder {
      */
     public abstract double getRawAngle_rad();
 
+    /**
+     * @return The unwrapped encoder object
+     */
+    public abstract Object getUnwrappedEncoder();
+
 }

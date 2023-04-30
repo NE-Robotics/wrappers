@@ -23,6 +23,11 @@ public class RealADXRS453 extends AbstractGyro {
     }
 
     @Override
+    public Object getUnwrappedGyro() {
+        return realGyro;
+    }
+
+    @Override
     public void reset() {
         realGyro.reset();
     }

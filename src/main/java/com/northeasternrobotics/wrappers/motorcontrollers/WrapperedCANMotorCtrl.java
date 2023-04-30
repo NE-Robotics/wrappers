@@ -52,6 +52,13 @@ public class WrapperedCANMotorCtrl {
     }
 
     /**
+     * @return Motor controller object
+     */
+    public Object getUnwrappedMotor() {
+        return ctrl.getUnwrappedMotor();
+    }
+
+    /**
      * Updates the abstracted controllers values
      */
     public void update() {

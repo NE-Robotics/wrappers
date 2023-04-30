@@ -42,6 +42,11 @@ public class SimSmartMotor extends AbstractSimmableMotorController {
     }
 
     @Override
+    public Object getUnwrappedMotor() {
+        return this;
+    }
+
+    @Override
     public void setInverted(boolean invert) {
         isInverted = invert;
     }

@@ -22,6 +22,11 @@ public class RealVenom extends AbstractSimmableMotorController {
     }
 
     @Override
+    public Object getUnwrappedMotor() {
+        return _venom;
+    }
+
+    @Override
     public void setInverted(boolean invert) {
         _venom.setInverted(invert);
     }

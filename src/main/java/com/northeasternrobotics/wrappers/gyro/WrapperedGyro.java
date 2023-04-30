@@ -30,6 +30,13 @@ public class WrapperedGyro {
     }
 
     /**
+     * @return gyro object
+     */
+    public Object getUnwrappedGyro() {
+        return gyro.getUnwrappedGyro();
+    }
+
+    /**
      * Updates the abstracted gyro values
      */
     public void update() {

@@ -21,6 +21,11 @@ public class RealNavx extends AbstractGyro {
     }
 
     @Override
+    public Object getUnwrappedGyro() {
+        return ahrs;
+    }
+
+    @Override
     public void reset() {
         ahrs.reset();
     }

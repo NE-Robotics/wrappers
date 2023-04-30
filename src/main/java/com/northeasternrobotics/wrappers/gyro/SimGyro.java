@@ -18,6 +18,11 @@ public class SimGyro extends AbstractGyro {
     }
 
     @Override
+    public Object getUnwrappedGyro() {
+        return this;
+    }
+
+    @Override
     public void reset() {
         rate = 0;
         angle = 0;

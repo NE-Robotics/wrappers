@@ -21,6 +21,11 @@ public class SimSwerveAzmthEncoder extends AbstractSwerveAzmthEncoder {
         SimDeviceBanks.addDIDevice(this, port);
     }
 
+    @Override
+    public Object getUnwrappedEncoder() {
+        return this;
+    }
+
     /**
      * Simulates the encoder updating
      *

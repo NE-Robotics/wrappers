@@ -25,6 +25,11 @@ public class RealThriftyEncoder extends AbstractSwerveAzmthEncoder {
     }
 
     @Override
+    public Object getUnwrappedEncoder() {
+        return m_encoder;
+    }
+
+    @Override
     public double getRawAngle_rad() {
         measVoltage = m_input.getVoltage();
         return m_encoder.getAbsolutePosition();

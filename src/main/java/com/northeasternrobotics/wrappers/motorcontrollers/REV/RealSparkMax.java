@@ -55,6 +55,10 @@ public class RealSparkMax extends AbstractSimmableMotorController {
 
     }
 
+    @Override
+    public Object getUnwrappedMotor() {
+        return m_motor;
+    }
 
     @Override
     public void setInverted(boolean invert) {

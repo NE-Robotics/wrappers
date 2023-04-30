@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.RobotBase;
 public class WrapperedSwerveAzimuthEncoder {
     AbstractSwerveAzmthEncoder enc;
     double curAngleRad;
-    // TODO: Bring in oxconfig maybe?
     double mountingOffset;
 
     /**
@@ -45,6 +44,13 @@ public class WrapperedSwerveAzimuthEncoder {
             enc = new SimSwerveAzmthEncoder(id);
         }
         this.mountingOffset = dfltMountingOffset_rad;
+    }
+
+    /**
+     * @return Motor controller object
+     */
+    public Object getUnwrappedEncoder() {
+        return enc.getUnwrappedEncoder();
     }
 
     /**

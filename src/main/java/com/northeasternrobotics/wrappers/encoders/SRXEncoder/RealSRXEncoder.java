@@ -25,6 +25,11 @@ public class RealSRXEncoder extends AbstractSwerveAzmthEncoder {
     }
 
     @Override
+    public Object getUnwrappedEncoder() {
+        return m_digitalInput;
+    }
+
+    @Override
     public double getRawAngle_rad() {
         freq = m_dutyCycle.getFrequency(); //Track this for fault mode detection
         double pulsetime = m_dutyCycle.getOutput() * (1.0 / freq);
