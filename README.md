@@ -1,4 +1,5 @@
-# Hardware Wrappers
+# Hardware Wrappers [![Gradle Package](https://github.com/NE-Robotics/wrappers/actions/workflows/gradle-publish.yml/badge.svg)](https://github.com/NE-Robotics/wrappers/actions/workflows/gradle-publish.yml)
+
 Hardware wrappers for FRC parts, controllers, &amp; encoders
 
 Designed to provide easy sim real mixing by supporting simulation of your entire robot through a model
